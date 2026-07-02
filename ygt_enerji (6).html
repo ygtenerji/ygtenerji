@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="YGT Enerji — Yenilenebilir enerji danışmanlık hizmetleri ile enerji çözümleri sunan güvenilir ortağınız.">
+  <title>YGT Enerji</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --navy: #04100A;
+      --navy2: #071A10;
+      --mid: #0D2818;
+      --electric: #00E5A0;
+      --solar: #F0C040;
+      --solar2: #E8860A;
+      --white: #EEF8F2;
+      --gray: #7AAA8E;
+      --card-bg: rgba(0,229,160,0.04);
+      --border-line: rgba(0,229,160,0.15);
+      --border-solar: rgba(240,192,64,0.2);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--navy);
+      color: var(--white);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* ── BACKGROUND SVG LAYER ── */
+    .bg-layer {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+    }
+    .bg-layer svg { width: 100%; height: 100%; }
+
+    /* everything on top of bg */
+    nav, .hero, .stats-bar, section, .cta-block, footer { position: relative; z-index: 1; }
+
+    /* NAV */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.1rem 3rem;
+      background: rgba(4,16,10,0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-line);
+    }
+    .logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem; font-weight: 700;
+      color: var(--white); letter-spacing: -0.02em;
+      text-decoration: none;
+    }
+    .logo span { color: var(--electric); }
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+    .nav-links a {
+      color: var(--gray); text-decoration: none;
+      font-size: 0.875rem; font-weight: 500; letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--electric); }
+    .nav-cta {
+      background: var(--electric); color: var(--navy);
+      border: none; padding: 0.55rem 1.4rem;
+      border-radius: 6px; font-weight: 700; font-size: 0.875rem;
+      cursor: pointer; letter-spacing: 0.01em; transition: opacity 0.2s;
+      font-family: 'Inter', sans-serif;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* HERO */
+    .hero {
+      min-height: 92vh;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: flex-start;
+      padding: 5rem 3rem 4rem;
+      overflow: hidden;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(0,229,160,0.1);
+      border: 1px solid rgba(0,229,160,0.35);
+      color: var(--electric); font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 0.4rem 1rem; border-radius: 100px; margin-bottom: 1.8rem;
+    }
+    .hero-badge::before {
+      content: ''; width: 6px; height: 6px;
+      background: var(--electric); border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.3;transform:scale(0.7)} }
+
+    .hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 700; line-height: 1.08;
+      letter-spacing: -0.03em; max-width: 800px;
+      margin-bottom: 1.6rem;
+    }
+    .hero h1 .accent { color: var(--electric); }
+    .hero h1 .solar { color: var(--solar); }
+
+    .hero-sub {
+      color: var(--gray); font-size: 1.1rem;
+      max-width: 520px; line-height: 1.75; margin-bottom: 2.6rem;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .btn-primary {
+      background: var(--electric); color: var(--navy);
+      border: none; padding: 0.85rem 2rem;
+      border-radius: 8px; font-weight: 700; font-size: 0.95rem;
+      cursor: pointer; transition: opacity 0.2s, transform 0.1s;
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
+    .btn-secondary {
+      background: transparent; color: var(--white);
+      border: 1px solid rgba(238,248,242,0.2); padding: 0.85rem 2rem;
+      border-radius: 8px; font-weight: 500; font-size: 0.95rem;
+      cursor: pointer; transition: border-color 0.2s, transform 0.1s;
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-secondary:hover { border-color: var(--electric); transform: translateY(-1px); }
+
+    /* HERO solar panel illustration (right side) */
+    .hero-panel {
+      position: absolute; right: 3rem; top: 50%; transform: translateY(-50%);
+      width: min(420px, 38vw); opacity: 0.55; z-index: 0; pointer-events: none;
+    }
+
+    /* STATS BAR */
+    .stats-bar {
+      display: grid; grid-template-columns: repeat(4,1fr);
+      border-top: 1px solid var(--border-line);
+      border-bottom: 1px solid var(--border-line);
+      background: rgba(7,26,16,0.7);
+    }
+    .stat-item {
+      padding: 2rem 2rem; text-align: center;
+      border-right: 1px solid var(--border-line);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.4rem; font-weight: 700;
+      color: var(--white); line-height: 1; margin-bottom: 0.4rem;
+    }
+    .stat-num span { color: var(--electric); }
+    .stat-label { color: var(--gray); font-size: 0.8rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; }
+
+    /* SECTION */
+    section { padding: 5rem 3rem; }
+    .section-label {
+      display: inline-block; font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--electric); margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 700;
+      line-height: 1.15; letter-spacing: -0.02em;
+      max-width: 580px; margin-bottom: 1rem;
+    }
+    .section-desc {
+      color: var(--gray); font-size: 1rem;
+      max-width: 520px; line-height: 1.7; margin-bottom: 3.5rem;
+    }
+
+    /* SERVICES */
+    .services-grid {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 1px;
+      background: var(--border-line); border: 1px solid var(--border-line);
+      border-radius: 16px; overflow: hidden;
+    }
+    .service-card {
+      background: rgba(7,26,16,0.85); padding: 2.4rem 2rem;
+      transition: background 0.3s;
+    }
+    .service-card:hover { background: rgba(0,229,160,0.07); }
+    .service-icon {
+      width: 48px; height: 48px; margin-bottom: 1.4rem;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .service-icon.green { background: rgba(0,229,160,0.12); }
+    .service-icon.solar { background: rgba(240,192,64,0.12); }
+    .service-icon svg { width: 24px; height: 24px; fill: none; stroke-width: 1.8; }
+    .service-icon.green svg { stroke: var(--electric); }
+    .service-icon.solar svg { stroke: var(--solar); }
+    .service-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.05rem; font-weight: 600; margin-bottom: 0.7rem;
+    }
+    .service-desc { color: var(--gray); font-size: 0.88rem; line-height: 1.65; }
+
+    /* WHY */
+    .why-section {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+    }
+    .why-visual { position: relative; width: 100%; max-width: 420px; aspect-ratio: 1; }
+    .why-points { display: flex; flex-direction: column; gap: 1.4rem; }
+    .why-point {
+      display: flex; gap: 1.2rem; align-items: flex-start;
+      padding: 1.4rem; border: 1px solid var(--border-line);
+      border-radius: 12px; background: rgba(7,26,16,0.6);
+      transition: border-color 0.25s, background 0.25s;
+    }
+    .why-point:hover { border-color: rgba(0,229,160,0.4); background: rgba(0,229,160,0.05); }
+    .why-point-icon {
+      flex-shrink: 0; width: 40px; height: 40px; border-radius: 10px;
+      background: rgba(0,229,160,0.1);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .why-point-icon svg { width: 20px; height: 20px; stroke: var(--electric); fill: none; stroke-width: 1.8; }
+    .why-point h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.95rem; font-weight: 600; margin-bottom: 0.3rem;
+    }
+    .why-point p { color: var(--gray); font-size: 0.85rem; line-height: 1.6; }
+
+    /* PROCESS */
+    .process-wrap {
+      background: rgba(7,26,16,0.6);
+      border-top: 1px solid var(--border-line);
+      border-bottom: 1px solid var(--border-line);
+    }
+    .process-steps {
+      display: grid; grid-template-columns: repeat(4,1fr); gap: 0; position: relative;
+    }
+    .process-steps::before {
+      content: ''; position: absolute;
+      top: 28px; left: 12.5%; width: 75%;
+      height: 1px; background: var(--border-line);
+    }
+    .process-step { padding: 0 1.5rem; text-align: center; }
+    .step-num {
+      width: 56px; height: 56px; border-radius: 50%; margin: 0 auto 1.4rem;
+      border: 1px solid rgba(0,229,160,0.35);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 700;
+      color: var(--electric); background: var(--navy2);
+      position: relative; z-index: 1;
+    }
+    .step-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.95rem; font-weight: 600; margin-bottom: 0.6rem;
+    }
+    .step-desc { color: var(--gray); font-size: 0.83rem; line-height: 1.6; }
+
+    /* CTA BLOCK */
+    .cta-block {
+      margin: 0 3rem 5rem;
+      border: 1px solid rgba(240,192,64,0.25);
+      border-radius: 20px; padding: 4.5rem 4rem;
+      display: flex; justify-content: space-between; align-items: center; gap: 2rem;
+      background: rgba(7,26,16,0.7);
+      position: relative; overflow: hidden;
+    }
+    .cta-block::before {
+      content: '';
+      position: absolute; top: -60px; right: -60px;
+      width: 280px; height: 280px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(240,192,64,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta-block h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 700;
+      letter-spacing: -0.02em; max-width: 480px; line-height: 1.2;
+      position: relative; z-index: 1;
+    }
+    .cta-block h2 span { color: var(--solar); }
+    .cta-actions { display: flex; gap: 1rem; flex-shrink: 0; position: relative; z-index: 1; }
+
+    /* CONTACT */
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;
+    }
+    .contact-info h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.8rem; font-weight: 700; margin-bottom: 1rem;
+    }
+    .contact-info p { color: var(--gray); line-height: 1.7; margin-bottom: 2rem; }
+    .contact-items { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-item {
+      display: flex; gap: 0.9rem; align-items: center;
+      color: var(--gray); font-size: 0.9rem;
+    }
+    .contact-item svg { width: 18px; height: 18px; stroke: var(--electric); fill: none; stroke-width: 1.8; flex-shrink: 0; }
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .contact-form input,
+    .contact-form textarea,
+    .contact-form select {
+      background: rgba(0,229,160,0.04);
+      border: 1px solid rgba(0,229,160,0.15);
+      border-radius: 8px; padding: 0.8rem 1rem;
+      color: var(--white); font-size: 0.9rem;
+      font-family: 'Inter', sans-serif; outline: none; width: 100%;
+      transition: border-color 0.2s;
+    }
+    .contact-form select option { background: var(--navy2); color: var(--white); }
+    .contact-form input::placeholder, .contact-form textarea::placeholder { color: var(--gray); }
+    .contact-form input:focus, .contact-form textarea:focus, .contact-form select:focus { border-color: rgba(0,229,160,0.5); }
+    .contact-form textarea { height: 120px; resize: vertical; }
+    .form-submit {
+      background: var(--electric); color: var(--navy);
+      border: none; padding: 0.9rem;
+      border-radius: 8px; font-weight: 700; font-size: 0.95rem;
+      cursor: pointer; transition: opacity 0.2s; font-family: 'Inter', sans-serif;
+    }
+    .form-submit:hover { opacity: 0.85; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border-line);
+      padding: 2.5rem 3rem;
+      display: flex; justify-content: space-between; align-items: center;
+      color: var(--gray); font-size: 0.82rem;
+      background: rgba(4,16,10,0.9);
+    }
+    footer .logo { font-size: 1.1rem; }
+    .footer-links { display: flex; gap: 2rem; list-style: none; }
+    .footer-links a { color: var(--gray); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--electric); }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero { padding: 4rem 1.5rem 3rem; }
+      .hero-panel { display: none; }
+      .stats-bar { grid-template-columns: repeat(2,1fr); }
+      .stat-item:nth-child(2) { border-right: none; }
+      section { padding: 3.5rem 1.5rem; }
+      .services-grid { grid-template-columns: 1fr; }
+      .why-section { grid-template-columns: 1fr; gap: 2.5rem; }
+      .why-visual { max-width: 280px; margin: 0 auto; }
+      .process-steps { grid-template-columns: repeat(2,1fr); gap: 2rem; }
+      .process-steps::before { display: none; }
+      .cta-block { margin: 0 1.5rem 4rem; flex-direction: column; padding: 3rem 2rem; }
+      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+      .footer-links { flex-wrap: wrap; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ FIXED BACKGROUND: yeşil enerji + güneş teması ═══ -->
+  <div class="bg-layer" aria-hidden="true">
+    <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <!-- deep green mesh gradient -->
+        <radialGradient id="g1" cx="80%" cy="20%" r="55%">
+          <stop offset="0%" stop-color="#0D3A1E" stop-opacity="0.9"/>
+          <stop offset="100%" stop-color="#04100A" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="g2" cx="10%" cy="70%" r="50%">
+          <stop offset="0%" stop-color="#0A2E18" stop-opacity="0.8"/>
+          <stop offset="100%" stop-color="#04100A" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="g3" cx="55%" cy="100%" r="40%">
+          <stop offset="0%" stop-color="#0F4020" stop-opacity="0.6"/>
+          <stop offset="100%" stop-color="#04100A" stop-opacity="0"/>
+        </radialGradient>
+        <!-- sun glow top-right -->
+        <radialGradient id="sun-glow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#F0C040" stop-opacity="0.22"/>
+          <stop offset="50%" stop-color="#E8860A" stop-opacity="0.08"/>
+          <stop offset="100%" stop-color="#E8860A" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="sun-core" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#FDE68A" stop-opacity="0.9"/>
+          <stop offset="40%" stop-color="#F0C040" stop-opacity="0.7"/>
+          <stop offset="100%" stop-color="#F0C040" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+
+      <!-- base dark green fills -->
+      <rect width="1440" height="900" fill="#04100A"/>
+      <rect width="1440" height="900" fill="url(#g1)"/>
+      <rect width="1440" height="900" fill="url(#g2)"/>
+      <rect width="1440" height="900" fill="url(#g3)"/>
+
+      <!-- ── SUN (top right) ── -->
+      <circle cx="1200" cy="140" r="280" fill="url(#sun-glow)"/>
+      <circle cx="1200" cy="140" r="56" fill="url(#sun-core)"/>
+      <!-- sun rays -->
+      <g stroke="#F0C040" stroke-opacity="0.22" stroke-linecap="round">
+        <line x1="1200" y1="64" x2="1200" y2="20"/>
+        <line x1="1200" y1="216" x2="1200" y2="260"/>
+        <line x1="1124" y1="140" x2="1080" y2="140"/>
+        <line x1="1276" y1="140" x2="1320" y2="140"/>
+        <line x1="1146" y1="86" x2="1114" y2="54"/>
+        <line x1="1254" y1="194" x2="1286" y2="226"/>
+        <line x1="1254" y1="86" x2="1286" y2="54"/>
+        <line x1="1146" y1="194" x2="1114" y2="226"/>
+      </g>
+
+      <!-- ── SOLAR FARM – 22° tilt, isometric perspective ── -->
+      <defs>
+        <linearGradient id="farm-fade-v" x1="0" y1="1" x2="0" y2="0">
+          <stop offset="0%"   stop-color="#04100A" stop-opacity="0.55"/>
+          <stop offset="30%"  stop-color="#04100A" stop-opacity="0"/>
+          <stop offset="75%"  stop-color="#04100A" stop-opacity="0"/>
+          <stop offset="100%" stop-color="#04100A" stop-opacity="0.9"/>
+        </linearGradient>
+        <linearGradient id="farm-fade-h" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%"  stop-color="#04100A" stop-opacity="0.85"/>
+          <stop offset="18%" stop-color="#04100A" stop-opacity="0"/>
+          <stop offset="85%" stop-color="#04100A" stop-opacity="0"/>
+          <stop offset="100%" stop-color="#04100A" stop-opacity="0.6"/>
+        </linearGradient>
+        <mask id="farm-mask-v">
+          <rect x="580" y="520" width="880" height="400" fill="white"/>
+          <rect x="580" y="520" width="880" height="400" fill="url(#farm-fade-v)"/>
+        </mask>
+        <mask id="farm-mask-h">
+          <rect x="580" y="520" width="880" height="400" fill="white"/>
+          <rect x="580" y="520" width="880" height="400" fill="url(#farm-fade-h)"/>
+        </mask>
+      </defs>
+
+      <!-- Ground glow -->
+      <ellipse cx="1020" cy="900" rx="420" ry="36" fill="#00E5A0" fill-opacity="0.025"/>
+
+      <!--
+        Each solar panel is a parallelogram tilted at 22° from horizontal.
+        Panel face = wide & shallow (landscape). 
+        Panel width ~96px, height (face, foreshortened at 22°) ~36px.
+        Top edge is 22° higher than bottom edge.
+        sin(22°)≈0.374, so for W=96: top-right is 96px right, 96*tan(22°)/2 ≈18px up from bottom-right.
+        
+        Panel shape (flat on ground, 22° tilt toward viewer):
+          BL = (x,      y)
+          BR = (x+96,   y - 36*sin(22°)) ≈ (x+96, y-13)   [bottom foreshortened]
+          TR = (x+96,   y - 36 - 13) = (x+96, y-49)         [top right]
+          TL = (x,      y - 36)                              [top left]
+        
+        Actually for a panel TILTED 22° facing south (toward viewer):
+          The panel face appears as a parallelogram where the top edge 
+          is recessed (further away) than bottom edge.
+          
+        Simplified isometric approach:
+          Panel W=90, apparent H=34 (foreshortened), tilt offset=22px (right side higher)
+          
+          BL=(x,   y),  BR=(x+90, y+11)   <- bottom edge goes DOWN-right (perspective)  
+          TR=(x+90, y+11-34),  TL=(x, y-34+0)  <- top edge parallel to bottom
+          
+        Let me use a cleaner model: rows recede into distance (top of screen),
+        each panel in a row is a slanted quad that looks like a real tilted panel:
+          
+          For row at screen-y=Y, panel starts at screen-x=X:
+            PW = panel screen width (shrinks for distant rows)
+            PH = panel screen height (face height, ~PW*0.38 for 22° tilt)
+            TILT = top edge is pushed up by PW*0.12 (perspective lean)
+            
+            BL = (X,      Y)
+            BR = (X+PW,   Y - PW*0.12)
+            TR = (X+PW,   Y - PW*0.12 - PH)
+            TL = (X,      Y - PH)
+            
+        Using this for a 7-column × 5-row grid with perspective scaling:
+      -->
+
+      <g mask="url(#farm-mask-v)" opacity="0.32">
+      <g mask="url(#farm-mask-h)">
+
+        <!-- ROW 1 – closest, largest: Y=880, PW=92, PH=34, lean=11 -->
+        <g stroke="#00E5A0" stroke-width="0.85" fill="rgba(0,229,160,0.055)">
+          <!-- col 1: X=622 -->
+          <polygon points="622,880 714,869 714,835 622,846"/>
+          <line x1="668,880" y1="668" x2="880" y2="869" stroke-width="0.4" opacity="0.5"/>
+          <line x1="622,863" y1="622" x2="863" y2="714" stroke-width="0.4" opacity="0.4"/>
+          <!-- col 2: X=724 -->
+          <polygon points="724,877 816,866 816,832 724,843"/>
+          <line x1="724,860" y1="724" x2="860" y2="816" stroke-width="0.4" opacity="0.5"/>
+          <!-- col 3: X=826 -->
+          <polygon points="826,874 918,863 918,829 826,840"/>
+          <line x1="826,857" y1="826" x2="857" y2="918" stroke-width="0.4" opacity="0.5"/>
+          <!-- col 4: X=928 -->
+          <polygon points="928,871 1020,860 1020,826 928,837"/>
+          <line x1="928,854" y1="928" x2="854" y2="1020" stroke-width="0.4" opacity="0.5"/>
+          <!-- col 5: X=1030 -->
+          <polygon points="1030,868 1122,857 1122,823 1030,834"/>
+          <line x1="1030,851" y1="1030" x2="851" y2="1122" stroke-width="0.4" opacity="0.5"/>
+          <!-- col 6: X=1132 -->
+          <polygon points="1132,865 1224,854 1224,820 1132,831"/>
+          <line x1="1132,848" y1="1132" x2="848" y2="1224" stroke-width="0.4" opacity="0.5"/>
+          <!-- col 7: X=1234 -->
+          <polygon points="1234,862 1326,851 1326,817 1234,828"/>
+          <line x1="1234,845" y1="1234" x2="845" y2="1326" stroke-width="0.4" opacity="0.4"/>
+        </g>
+        <!-- mounting posts row 1 -->
+        <g stroke="#00E5A0" stroke-width="0.6" opacity="0.25">
+          <line x1="668" y1="863" x2="668" y2="900"/>
+          <line x1="770" y1="860" x2="770" y2="900"/>
+          <line x1="872" y1="857" x2="872" y2="900"/>
+          <line x1="974" y1="854" x2="974" y2="900"/>
+          <line x1="1076" y1="851" x2="1076" y2="900"/>
+          <line x1="1178" y1="848" x2="1178" y2="900"/>
+          <line x1="1280" y1="845" x2="1280" y2="900"/>
+        </g>
+
+        <!-- ROW 2: Y=815, PW=80, PH=29, lean=9 -->
+        <g stroke="#00E5A0" stroke-width="0.7" fill="rgba(0,229,160,0.045)">
+          <polygon points="628,815 708,806 708,777 628,786"/>
+          <polygon points="718,812 798,803 798,774 718,783"/>
+          <polygon points="808,809 888,800 888,771 808,780"/>
+          <polygon points="898,806 978,797 978,768 898,777"/>
+          <polygon points="988,803 1068,794 1068,765 988,774"/>
+          <polygon points="1078,800 1158,791 1158,762 1078,771"/>
+          <polygon points="1168,797 1248,788 1248,759 1168,768"/>
+          <polygon points="1258,794 1338,785 1338,756 1258,765"/>
+        </g>
+        <!-- horizontal mid-lines row 2 -->
+        <g stroke="#00E5A0" stroke-width="0.3" opacity="0.4">
+          <line x1="628" y1="800" x2="708" y2="792"/>
+          <line x1="718" y1="797" x2="798" y2="789"/>
+          <line x1="808" y1="794" x2="888" y2="786"/>
+          <line x1="898" y1="791" x2="978" y2="783"/>
+          <line x1="988" y1="788" x2="1068" y2="780"/>
+          <line x1="1078" y1="785" x2="1158" y2="777"/>
+        </g>
+
+        <!-- ROW 3: Y=758, PW=68, PH=25, lean=8 -->
+        <g stroke="#00E5A0" stroke-width="0.55" fill="rgba(0,229,160,0.035)">
+          <polygon points="638,758 706,750 706,725 638,733"/>
+          <polygon points="716,755 784,747 784,722 716,730"/>
+          <polygon points="794,752 862,744 862,719 794,727"/>
+          <polygon points="872,749 940,741 940,716 872,724"/>
+          <polygon points="950,746 1018,738 1018,713 950,721"/>
+          <polygon points="1028,743 1096,735 1096,710 1028,718"/>
+          <polygon points="1106,740 1174,732 1174,707 1106,715"/>
+          <polygon points="1184,737 1252,729 1252,704 1184,712"/>
+          <polygon points="1262,734 1330,726 1330,701 1262,709"/>
+        </g>
+
+        <!-- ROW 4: Y=708, PW=57, PH=21, lean=6 -->
+        <g stroke="#00E5A0" stroke-width="0.45" fill="rgba(0,229,160,0.025)" opacity="0.85">
+          <polygon points="645,708 702,702 702,681 645,687"/>
+          <polygon points="712,706 769,700 769,679 712,685"/>
+          <polygon points="779,704 836,698 836,677 779,683"/>
+          <polygon points="846,702 903,696 903,675 846,681"/>
+          <polygon points="913,700 970,694 970,673 913,679"/>
+          <polygon points="980,698 1037,692 1037,671 980,677"/>
+          <polygon points="1047,696 1104,690 1104,669 1047,675"/>
+          <polygon points="1114,694 1171,688 1171,667 1114,673"/>
+          <polygon points="1181,692 1238,686 1238,665 1181,671"/>
+          <polygon points="1248,690 1305,684 1305,663 1248,669"/>
+        </g>
+
+        <!-- ROW 5: Y=668, PW=46, PH=17, lean=5 – horizon row -->
+        <g stroke="#00E5A0" stroke-width="0.35" fill="none" opacity="0.55">
+          <polygon points="650,668 696,663 696,646 650,651"/>
+          <polygon points="706,666 752,661 752,644 706,649"/>
+          <polygon points="762,664 808,659 808,642 762,647"/>
+          <polygon points="818,662 864,657 864,640 818,645"/>
+          <polygon points="874,660 920,655 920,638 874,643"/>
+          <polygon points="930,658 976,653 976,636 930,641"/>
+          <polygon points="986,656 1032,651 1032,634 986,639"/>
+          <polygon points="1042,654 1088,649 1088,632 1042,637"/>
+          <polygon points="1098,652 1144,647 1144,630 1098,635"/>
+          <polygon points="1154,650 1200,645 1200,628 1154,633"/>
+          <polygon points="1210,648 1256,643 1256,626 1210,631"/>
+          <polygon points="1266,646 1312,641 1312,624 1266,629"/>
+        </g>
+
+        <!-- ROW 6: horizon fade -->
+        <g stroke="#00E5A0" stroke-width="0.25" fill="none" opacity="0.3">
+          <polygon points="658,636 698,632 698,619 658,623"/>
+          <polygon points="708,634 748,630 748,617 708,621"/>
+          <polygon points="758,632 798,628 798,615 758,619"/>
+          <polygon points="808,630 848,626 848,613 808,617"/>
+          <polygon points="858,628 898,624 898,611 858,615"/>
+          <polygon points="908,626 948,622 948,609 908,613"/>
+          <polygon points="958,624 998,620 998,607 958,611"/>
+          <polygon points="1008,622 1048,618 1048,605 1008,609"/>
+          <polygon points="1058,620 1098,616 1098,603 1058,607"/>
+          <polygon points="1108,618 1148,614 1148,601 1108,605"/>
+          <polygon points="1158,616 1198,612 1198,599 1158,603"/>
+          <polygon points="1208,614 1248,610 1248,597 1208,601"/>
+          <polygon points="1258,612 1298,608 1298,595 1258,599"/>
+        </g>
+
+        <!-- solar glints -->
+        <circle cx="760" cy="843" r="2.5" fill="#F0C040" fill-opacity="0.55"/>
+        <circle cx="900" cy="838" r="2"   fill="#F0C040" fill-opacity="0.4"/>
+        <circle cx="1045" cy="832" r="2"  fill="#F0C040" fill-opacity="0.35"/>
+        <circle cx="1185" cy="826" r="1.5" fill="#F0C040" fill-opacity="0.3"/>
+        <circle cx="852"  cy="790" r="1.5" fill="#F0C040" fill-opacity="0.3"/>
+        <circle cx="1000" cy="785" r="1.5" fill="#F0C040" fill-opacity="0.25"/>
+
+        <!-- horizon line -->
+        <line x1="610" y1="622" x2="1420" y2="622" stroke="#00E5A0" stroke-width="0.35" opacity="0.12"/>
+
+      </g>
+      </g>
+
+      <!-- soft ground glow -->
+      <ellipse cx="1000" cy="895" rx="400" ry="32" fill="#00E5A0" fill-opacity="0.028"/>
+
+      <!-- ── WIND TURBINES (left side, faint) ── -->
+      <g opacity="0.13" stroke="#00E5A0" stroke-width="1" fill="none" stroke-linecap="round">
+        <!-- turbine 1 -->
+        <line x1="100" y1="900" x2="100" y2="560"/>
+        <line x1="100" y1="560" x2="100" y2="490"/>
+        <ellipse cx="100" cy="490" rx="4" ry="4" fill="#00E5A0" stroke="none" opacity="0.4"/>
+        <!-- blade top -->
+        <path d="M100 490 Q90 450 80 400" stroke-width="2"/>
+        <!-- blade lower-right -->
+        <path d="M100 490 Q135 505 170 518" stroke-width="2"/>
+        <!-- blade lower-left -->
+        <path d="M100 490 Q65 510 30 528" stroke-width="2"/>
+
+        <!-- turbine 2 (smaller, behind) -->
+        <line x1="220" y1="900" x2="220" y2="600"/>
+        <ellipse cx="220" cy="600" rx="3" ry="3" fill="#00E5A0" stroke="none" opacity="0.3"/>
+        <path d="M220 600 Q212 568 205 536"/>
+        <path d="M220 600 Q248 610 276 620"/>
+        <path d="M220 600 Q192 614 164 628"/>
+      </g>
+
+      <!-- ── ENERGY CIRCUIT LINES (subtle grid top-left) ── -->
+      <g opacity="0.07" stroke="#00E5A0" stroke-width="0.6">
+        <line x1="0" y1="200" x2="400" y2="200"/>
+        <line x1="0" y1="300" x2="300" y2="300"/>
+        <line x1="0" y1="400" x2="200" y2="400"/>
+        <line x1="200" y1="0" x2="200" y2="400"/>
+        <line x1="300" y1="0" x2="300" y2="300"/>
+        <line x1="400" y1="0" x2="400" y2="200"/>
+        <!-- nodes -->
+        <circle cx="200" cy="200" r="3" fill="#00E5A0" stroke="none" opacity="0.5"/>
+        <circle cx="300" cy="300" r="3" fill="#00E5A0" stroke="none" opacity="0.5"/>
+        <circle cx="400" cy="200" r="2" fill="#00E5A0" stroke="none" opacity="0.4"/>
+      </g>
+
+      <!-- ── LEAF / ORGANIC SHAPES ── -->
+      <!-- large faint leaf bottom-left -->
+      <g opacity="0.06" fill="#22C55E">
+        <path d="M-60 900 Q100 700 250 750 Q180 850 -60 900Z"/>
+        <path d="M-30 900 Q80 780 180 810 Q130 870 -30 900Z"/>
+      </g>
+      <!-- right mid leaf -->
+      <g opacity="0.05" fill="#00E5A0">
+        <path d="M1440 400 Q1300 350 1280 500 Q1380 480 1440 400Z"/>
+      </g>
+
+      <!-- ── SUBTLE HEX GRID (center, barely visible) ── -->
+      <g opacity="0.04" stroke="#00E5A0" stroke-width="0.5" fill="none">
+        <polygon points="600,320 626,306 652,320 652,348 626,362 600,348"/>
+        <polygon points="652,320 678,306 704,320 704,348 678,362 652,348"/>
+        <polygon points="704,320 730,306 756,320 756,348 730,362 704,348"/>
+        <polygon points="626,362 652,348 678,362 678,390 652,404 626,390"/>
+        <polygon points="678,362 704,348 730,362 730,390 704,404 678,390"/>
+        <polygon points="600,278 626,264 652,278 652,306 626,320 600,306"/>
+        <polygon points="652,278 678,264 704,278 704,306 678,320 652,306"/>
+        <polygon points="704,278 730,264 756,278 756,306 730,320 704,306"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="#" class="logo" style="display:flex;align-items:center;padding:4px 0;"><img src="data:image/png;base64,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" alt="YGT Enerji" style="height:90px;width:auto;display:block;filter:drop-shadow(0 0 14px rgba(0,229,160,0.55)) drop-shadow(0 0 28px rgba(240,192,64,0.25)) drop-shadow(0 3px 8px rgba(0,0,0,0.6));"></a>
+    <ul class="nav-links">
+      <li><a href="#hizmetler">Hizmetler</a></li>
+      <li><a href="#neden-ygt">Hakkımızda</a></li>
+      <li><a href="#surec">Süreç</a></li>
+      <li><a href="#iletisim">İletişim</a></li>
+    </ul>
+    <button class="nav-cta" onclick="document.getElementById('iletisim').scrollIntoView({behavior:'smooth'})">Teklif Al</button>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero" id="hero">
+    <!-- inline SVG solar panel illustration right side -->
+    <div class="hero-panel" aria-hidden="true">
+      <svg viewBox="0 0 420 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- tilt frame -->
+        <rect x="40" y="60" width="340" height="230" rx="6" stroke="#00E5A0" stroke-width="1.2" fill="rgba(0,229,160,0.04)"/>
+        <!-- panel grid 3x4 -->
+        <line x1="40" y1="137" x2="380" y2="137" stroke="#00E5A0" stroke-width="0.6" opacity="0.5"/>
+        <line x1="40" y1="214" x2="380" y2="214" stroke="#00E5A0" stroke-width="0.6" opacity="0.5"/>
+        <line x1="125" y1="60" x2="125" y2="290" stroke="#00E5A0" stroke-width="0.6" opacity="0.5"/>
+        <line x1="210" y1="60" x2="210" y2="290" stroke="#00E5A0" stroke-width="0.6" opacity="0.5"/>
+        <line x1="295" y1="60" x2="295" y2="290" stroke="#00E5A0" stroke-width="0.6" opacity="0.5"/>
+        <!-- cell highlights -->
+        <rect x="44" y="64" width="77" height="69" rx="2" fill="#00E5A0" fill-opacity="0.06"/>
+        <rect x="214" y="141" width="77" height="69" rx="2" fill="#F0C040" fill-opacity="0.06"/>
+        <rect x="129" y="218" width="77" height="68" rx="2" fill="#00E5A0" fill-opacity="0.06"/>
+        <!-- stand -->
+        <line x1="210" y1="290" x2="180" y2="370" stroke="#00E5A0" stroke-width="1.5" opacity="0.4"/>
+        <line x1="210" y1="290" x2="240" y2="370" stroke="#00E5A0" stroke-width="1.5" opacity="0.4"/>
+        <line x1="155" y1="370" x2="265" y2="370" stroke="#00E5A0" stroke-width="1.5" opacity="0.4"/>
+        <!-- sun rays emanating from top right -->
+        <circle cx="360" cy="40" r="22" fill="#F0C040" fill-opacity="0.15"/>
+        <circle cx="360" cy="40" r="12" fill="#F0C040" fill-opacity="0.35"/>
+        <line x1="360" y1="10" x2="360" y2="2" stroke="#F0C040" stroke-width="1.2" opacity="0.5"/>
+        <line x1="360" y1="70" x2="360" y2="78" stroke="#F0C040" stroke-width="1.2" opacity="0.5"/>
+        <line x1="330" y1="40" x2="322" y2="40" stroke="#F0C040" stroke-width="1.2" opacity="0.5"/>
+        <line x1="390" y1="40" x2="398" y2="40" stroke="#F0C040" stroke-width="1.2" opacity="0.5"/>
+        <line x1="339" y1="19" x2="333" y2="13" stroke="#F0C040" stroke-width="1.2" opacity="0.4"/>
+        <line x1="381" y1="61" x2="387" y2="67" stroke="#F0C040" stroke-width="1.2" opacity="0.4"/>
+        <line x1="381" y1="19" x2="387" y2="13" stroke="#F0C040" stroke-width="1.2" opacity="0.4"/>
+        <line x1="339" y1="61" x2="333" y2="67" stroke="#F0C040" stroke-width="1.2" opacity="0.4"/>
+        <!-- energy flow arrow -->
+        <path d="M80 320 Q140 300 200 320 Q260 340 320 320" stroke="#00E5A0" stroke-width="1" stroke-dasharray="4 3" opacity="0.35" fill="none"/>
+        <polygon points="318,316 326,320 318,324" fill="#00E5A0" opacity="0.35"/>
+      </svg>
+    </div>
+
+    <div class="hero-badge">Türkiye Genelinde Hizmet Veriyoruz</div>
+    <h1>
+      Geleceğin <span class="accent">enerjisini</span><br>
+      bugün <span class="solar">denetliyoruz.</span>
+    </h1>
+    <p class="hero-sub">
+      YGT Enerji; güneş, rüzgar ve hibrit sistemlerde saha denetimi, danışmanlık ve enerji yönetimiyle sürdürülebilir dönüşümünüzün güvenilir ortağıdır.
+    </p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="document.getElementById('iletisim').scrollIntoView({behavior:'smooth'})">Ücretsiz Danışmanlık</button>
+      <button class="btn-secondary" onclick="document.getElementById('hizmetler').scrollIntoView({behavior:'smooth'})">Hizmetlerimizi İncele →</button>
+    </div>
+  </div>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-num">50<span>+</span></div>
+      <div class="stat-label">Tamamlanan Proje</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">15<span> yıl</span></div>
+      <div class="stat-label">Sektör Deneyimi</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">200<span>MW+</span></div>
+      <div class="stat-label">Denetlenen & Yönetilen Güç</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">98<span>%</span></div>
+      <div class="stat-label">Müşteri Memnuniyeti</div>
+    </div>
+  </div>
+
+
+  <!-- Türkiye Geneli Hizmet Bandı -->
+  <div style="background:rgba(0,229,160,0.07);border-bottom:1px solid rgba(0,229,160,0.18);padding:0.75rem 3rem;display:flex;align-items:center;justify-content:center;gap:2.5rem;flex-wrap:wrap;position:relative;z-index:1;">
+    <span style="color:var(--electric);font-size:0.75rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;">📍 Türkiye Genelinde Hizmet</span>
+    <span style="color:var(--gray);font-size:0.8rem;">İstanbul · Ankara · İzmir · Konya · Bursa · Antalya · Gaziantep · Adana · ve tüm Türkiye</span>
+  </div>
+
+  <!-- SERVICES -->
+  <section id="hizmetler">
+    <div class="section-label">Hizmetlerimiz</div>
+    <div class="section-title">Enerji ihtiyaçlarınız için kapsamlı çözümler</div>
+    <p class="section-desc">Fizibilite analizinden saha denetimine, danışmanlıktan enerji optimizasyonuna kadar eksiksiz hizmet.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon solar">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </div>
+        <div class="service-name">Güneş Enerjisi Saha Denetimi</div>
+        <p class="service-desc">Güneş santralleri için termal kamera, EL görüntüleme ve I-V eğrisi testleriyle kapsamlı saha denetimi ve performans analizi.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon green">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <div class="service-name">Mahsuplaşma Takibi</div>
+        <p class="service-desc">YEKDEM, lisanssız üretim ve şebeke mahsuplaşma süreçlerinin takibi, doğrulama ve optimizasyonu için uzman danışmanlık hizmeti.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon solar">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M6 8h.01M6 12h.01M10 8h4M10 12h4"/></svg>
+        </div>
+        <div class="service-name">GES İzleme, İşletme & Bakım</div>
+        <p class="service-desc">Güneş enerji santrallerinin uzaktan SCADA izlemesi, periyodik bakım planlaması ve arıza müdahalesi koordinasyonu ile verim garantisi.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon green">
+          <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+        </div>
+        <div class="service-name">Fizibilite & Lisanslama</div>
+        <p class="service-desc">Yenilenebilir enerji projelerinde yasal süreçler, lisans başvuruları ve bağımsız fizibilite raporları.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon solar">
+          <svg viewBox="0 0 24 24"><path d="M2 12h20M12 2v20M5 5l14 14M19 5L5 19" stroke-linecap="round"/></svg>
+        </div>
+        <div class="service-name">Bağımsız Teknik Denetim</div>
+        <p class="service-desc">İnşaat aşamasında ve devreye alma sürecinde bağımsız mühendislik gözlemi ve teknik denetim hizmetleri (Owner's Engineer).</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon green">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+        </div>
+        <div class="service-name">Enerji Ticareti & PPA</div>
+        <p class="service-desc">Elektrik piyasasında enerji alım-satım anlaşmaları ve uzun vadeli PPA yapılandırmasında danışmanlık.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY YGT -->
+  <section id="neden-ygt">
+    <div class="why-section">
+      <!-- SVG visual: animated leaf + energy ring -->
+      <div class="why-visual">
+        <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+          <defs>
+            <radialGradient id="wg1" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#00E5A0" stop-opacity="0.12"/>
+              <stop offset="100%" stop-color="#00E5A0" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <!-- outer ring -->
+          <circle cx="200" cy="200" r="185" stroke="#00E5A0" stroke-opacity="0.12" stroke-width="1"/>
+          <circle cx="200" cy="200" r="145" stroke="#00E5A0" stroke-opacity="0.1" stroke-width="1" stroke-dasharray="4 6"/>
+          <circle cx="200" cy="200" r="105" stroke="#F0C040" stroke-opacity="0.15" stroke-width="1"/>
+          <!-- inner fill -->
+          <circle cx="200" cy="200" r="85" fill="url(#wg1)"/>
+          <circle cx="200" cy="200" r="65" fill="rgba(0,229,160,0.06)" stroke="#00E5A0" stroke-opacity="0.2" stroke-width="1"/>
+          <!-- leaf shape center -->
+          <path d="M200 160 Q230 180 230 200 Q230 230 200 245 Q170 230 170 200 Q170 180 200 160Z" fill="#00E5A0" fill-opacity="0.18" stroke="#00E5A0" stroke-opacity="0.4" stroke-width="1.2"/>
+          <line x1="200" y1="160" x2="200" y2="245" stroke="#00E5A0" stroke-opacity="0.25" stroke-width="0.8"/>
+          <path d="M200 175 Q220 188 225 200" stroke="#00E5A0" stroke-opacity="0.2" stroke-width="0.6" fill="none"/>
+          <!-- solar symbol -->
+          <circle cx="200" cy="200" r="14" fill="#F0C040" fill-opacity="0.25" stroke="#F0C040" stroke-opacity="0.5" stroke-width="1.2"/>
+          <!-- orbit dots -->
+          <circle cx="200" cy="15" r="5" fill="#00E5A0" fill-opacity="0.6">
+            <animateTransform attributeName="transform" type="rotate" from="0 200 200" to="360 200 200" dur="18s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="55" cy="200" r="4" fill="#F0C040" fill-opacity="0.7">
+            <animateTransform attributeName="transform" type="rotate" from="0 200 200" to="-360 200 200" dur="12s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="200" cy="55" r="3" fill="#00E5A0" fill-opacity="0.5">
+            <animateTransform attributeName="transform" type="rotate" from="90 200 200" to="450 200 200" dur="28s" repeatCount="indefinite"/>
+          </circle>
+          <!-- label -->
+          <text x="200" y="196" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="18" font-weight="700" fill="#00E5A0">YGT</text>
+          <text x="200" y="214" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="#7AAA8E" letter-spacing="2">ENERJİ</text>
+        </svg>
+      </div>
+
+      <div>
+        <div class="section-label">Neden YGT Enerji?</div>
+        <div class="section-title" style="margin-bottom:1rem;">Sektörün güvendiği bağımsız uzmanlık</div>
+        <p class="section-desc" style="margin-bottom:2rem;">15 yılı aşkın deneyim ve 50'den fazla denetlenen projemizle, yenilenebilir enerji sektöründe Türkiye'nin önde gelen bağımsız teknik danışmanlarından biriyiz.</p>
+        <div class="why-points">
+          <div class="why-point">
+            <div class="why-point-icon">
+              <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <div>
+              <h3>Tam bağımsız, tarafsız denetim</h3>
+              <p>Hiçbir EPC firmasıyla bağlantımız yoktur. Raporlarımız %100 bağımsız ve yatırımcı odaklıdır.</p>
+            </div>
+          </div>
+          <div class="why-point">
+            <div class="why-point-icon">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+              <h3>Hızlı saha & rapor teslimi</h3>
+              <p>Denetim ziyaretini takiben 5 iş günü içinde detaylı teknik rapor teslim ederiz.</p>
+            </div>
+          </div>
+          <div class="why-point">
+            <div class="why-point-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div>
+              <h3>Lisanslı & sertifikalı mühendisler</h3>
+              <p>Ekibimiz IEC, TÜV ve TEDAŞ standartlarında sertifikalı, sahada deneyimli mühendislerden oluşur.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <div class="process-wrap" id="surec">
+    <section style="padding-bottom:0;">
+      <div style="text-align:center;margin-bottom:4rem;">
+        <div class="section-label">Nasıl Çalışıyoruz</div>
+        <div class="section-title" style="max-width:100%;text-align:center;">Dört adımda saha denetim süreci</div>
+      </div>
+      <div class="process-steps" style="padding-bottom:5rem;">
+        <div class="process-step">
+          <div class="step-num">01</div>
+          <div class="step-title">Başvuru & Kapsam</div>
+          <p class="step-desc">Projenizi ve ihtiyaçlarınızı değerlendiririz. Denetim kapsamını ve takvimini birlikte belirliyoruz.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">02</div>
+          <div class="step-title">Saha Denetimi</div>
+          <p class="step-desc">Uzman mühendislerimiz sahaya giderek termal görüntüleme, I-V testi ve görsel denetim gerçekleştirir.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">03</div>
+          <div class="step-title">Analiz & Raporlama</div>
+          <p class="step-desc">Toplanan veriler IEC standartlarında analiz edilerek kapsamlı teknik rapor hazırlanır.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">04</div>
+          <div class="step-title">Aksiyon & Takip</div>
+          <p class="step-desc">Tespit edilen eksiklikler için aksiyon planı sunar, gerektiğinde takip denetimi yaparız.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- CTA BLOCK -->
+  <div class="cta-block">
+    <h2>Sahanızın gerçek performansını<br><span>bağımsız gözle</span> değerlendirelim.</h2>
+    <div class="cta-actions">
+      <button class="btn-primary" onclick="document.getElementById('iletisim').scrollIntoView({behavior:'smooth'})">Ücretsiz Ön Görüşme</button>
+      <button class="btn-secondary">0544 483 52 91</button>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <section id="iletisim">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="section-label">İletişim</div>
+        <h3>Projenizi konuşalım</h3>
+        <p>Saha denetimi veya danışmanlık ihtiyacınız için formu doldurun. Uzman mühendislerimiz en kısa sürede size dönüş yapar.</p>
+        <div class="contact-items">
+          <div class="contact-item">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.15h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.73a16 16 0 0 0 6.29 6.29l.94-.94a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span>0544 483 52 91</span>
+          </div>
+          <div class="contact-item">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <span>mehmet.yigit@ygtenerji.com</span>
+          </div>
+          <div class="contact-item">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>İstanbul Merkez &mdash; Türkiye Geneli Hizmet</span>
+          </div>
+        </div>
+      </div>
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <input type="text" placeholder="Adınız Soyadınız" required>
+          <input type="email" placeholder="E-posta adresiniz" required>
+        </div>
+        <input type="text" placeholder="Şirket / Kurum adı">
+        <select>
+          <option value="" disabled selected>İlgilendiğiniz hizmet seçin</option>
+          <option>Güneş Enerjisi Saha Denetimi</option>
+          <option>Mahsuplaşma Takibi</option>
+          <option>GES İzleme, İşletme & Bakım</option>
+          <option>Bağımsız Teknik Denetim (Owner's Engineer)</option>
+          <option>Fizibilite & Lisanslama</option>
+          <option>Enerji Ticareti & PPA</option>
+          <option>Diğer</option>
+        </select>
+        <textarea placeholder="Projeniz ve denetim ihtiyacınız hakkında kısaca bilgi verin..."></textarea>
+        <button type="submit" class="form-submit">Mesaj Gönder →</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="#" class="logo" style="display:flex;align-items:center;padding:4px 0;"><img src="data:image/png;base64,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" alt="YGT Enerji" style="height:90px;width:auto;display:block;filter:drop-shadow(0 0 14px rgba(0,229,160,0.55)) drop-shadow(0 0 28px rgba(240,192,64,0.25)) drop-shadow(0 3px 8px rgba(0,0,0,0.6));"></a>
+    <ul class="footer-links">
+      <li><a href="#">Gizlilik Politikası</a></li>
+      <li><a href="#">Kullanım Koşulları</a></li>
+      <li><a href="#">Kariyer</a></li>
+    </ul>
+    <div>© 2026 YGT Enerji. Tüm hakları saklıdır.</div>
+  </footer>
+
+  <script>
+    async function handleSubmit(e) {
+      e.preventDefault();
+      const form = e.target;
+      const btn = form.querySelector('.form-submit');
+
+      // Alanları topla
+      const inputs = form.querySelectorAll('input, textarea, select');
+      const fields = {};
+      const labels = ['Ad Soyad', 'E-posta', 'Şirket', 'Hizmet', 'Mesaj'];
+      inputs.forEach((el, i) => { fields[labels[i] || el.name || i] = el.value; });
+
+      btn.textContent = 'Gönderiliyor...';
+      btn.disabled = true;
+
+      // Özet metin oluştur
+      const summary = Object.entries(fields)
+        .filter(([,v]) => v)
+        .map(([k,v]) => `${k}: ${v}`)
+        .join('\n');
+
+      // Formspree üzerinden mehmet.yigit@ygtenerji.com adresine gönder
+      try {
+        const FORMSPREE_ID = 'xyzgpneo'; // ← Formspree'den aldığınız ID'yi buraya yazın
+        const res = await fetch('https://formspree.io/f/' + FORMSPREE_ID, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            _subject: `YGT Enerji Web Sitesi – Yeni Danışmanlık Talebi: ${fields['Ad Soyad'] || ''}`,
+            _replyto: fields['E-posta'] || '',
+            mesaj: summary
+          })
+        });
+
+        if (res.ok) {
+          btn.textContent = 'Mesajınız İletildi ✓';
+          btn.style.background = '#22c55e';
+          form.reset();
+          setTimeout(() => {
+            btn.textContent = 'Mesaj Gönder →';
+            btn.style.background = 'var(--electric)';
+            btn.disabled = false;
+          }, 4000);
+        } else {
+          throw new Error('Sunucu hatası');
+        }
+      } catch (err) {
+        // Fallback: mailto
+        const body = encodeURIComponent(summary);
+        const subject = encodeURIComponent(`YGT Enerji Danışmanlık Talebi – ${fields['Ad Soyad'] || ''}`);
+        window.location.href = `mailto:mehmet.yigit@ygtenerji.com?subject=${subject}&body=${body}`;
+        btn.textContent = 'Mesaj Gönder →';
+        btn.style.background = 'var(--electric)';
+        btn.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>
